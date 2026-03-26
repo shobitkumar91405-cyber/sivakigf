@@ -8,583 +8,201 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&display=swap');
         
-        :root {
-            --primary: #f472b6;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             font-family: 'Playfair Display', serif;
-            background: radial-gradient(circle at center, #1a0033 0%, #0a001f 100%);
-            overflow: hidden;
-            color: white;
-            height: 100vh;
-            position: relative;
-        }
-        
-        /* ROMANTIC GIF STYLING */
-        .romantic-gif {
-            width: 220px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 24px;
-            box-shadow: 0 0 30px rgba(236, 72, 153, 0.4), inset 0 0 20px rgba(255,255,255,0.2);
-            border: 3px solid rgba(255, 255, 255, 0.15);
-            animation: soft-float 4s ease-in-out infinite;
-            margin: 0 auto 24px auto;
-            position: relative;
-            z-index: 30;
-            background: rgba(255, 255, 255, 0.05); /* Fallback while loading */
+            background: #0a001f;
+            overflow: hidden; color: white; height: 100vh; position: relative;
         }
 
-        /* TWINKLING STARS & SHOOTING STARS */
-        .stars {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
+        /* MEDIA STYLING */
+        .romantic-gif {
+            width: 200px; height: 200px; object-fit: cover; border-radius: 25px;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
+            margin: 0 auto 15px; animation: float 3s ease-in-out infinite;
+            border: 2px solid rgba(255,255,255,0.1);
         }
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 4s infinite alternate ease-in-out;
-            box-shadow: 0 0 8px #fff, 0 0 15px #f472b6;
-        }
-        .shooting-star {
-            position: absolute;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-            border-radius: 999px;
-            box-shadow: 0 0 20px #fff;
-            animation: shoot 3s linear infinite;
-            opacity: 0;
-            transform: rotate(-45deg);
-        }
-        
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.3); }
-        }
-        @keyframes shoot {
-            0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
-            100% { transform: translateX(-1000px) translateY(1000px) rotate(-45deg); opacity: 0; }
-        }
-        
-        /* SUBTLE SOLAR SYSTEM */
-        .solar-system {
-            position: fixed;
-            top: 15%; right: 8%; width: 280px; height: 280px;
-            z-index: 2; opacity: 0.25; pointer-events: none;
-        }
-        .sun {
-            position: absolute; top: 50%; left: 50%;
-            width: 45px; height: 45px;
-            background: radial-gradient(circle, #facc15, #f59e0b);
-            border-radius: 50%;
-            box-shadow: 0 0 60px #facc15, 0 0 120px #ec4899;
-            transform: translate(-50%, -50%);
-            animation: pulse-sun 8s infinite ease-in-out;
-        }
-        .orbit {
-            position: absolute; top: 50%; left: 50%;
-            border: 1px solid rgba(244, 114, 182, 0.3);
-            border-radius: 50%; transform: translate(-50%, -50%);
-        }
-        .planet {
-            position: absolute; background: #ec4899;
-            border-radius: 50%; box-shadow: 0 0 15px #ec4899;
-        }
-        @keyframes pulse-sun { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.15); } }
-        
-        /* HEADER */
-        .header {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-            background: rgba(10, 0, 31, 0.6); backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(244, 114, 182, 0.2);
-            padding: 16px 30px; display: flex; align-items: center; justify-content: space-between;
-        }
-        .insta-btn {
-            display: flex; align-items: center; gap: 8px;
-            background: linear-gradient(90deg, #ec4899, #f472b6);
-            padding: 8px 20px; border-radius: 9999px;
-            font-weight: 700; font-size: 15px; transition: all 0.3s ease;
-        }
-        .insta-btn:hover { transform: scale(1.08); box-shadow: 0 0 25px #ec4899; }
-        
-        /* PAGES CONTAINER & SMOOTH CINEMATIC TRANSITION */
-        .pages { position: relative; width: 100vw; height: 100vh; z-index: 10; overflow: hidden; }
+        .full-vdo { width: 320px; border-radius: 20px; box-shadow: 0 0 50px #ec4899; border: 2px solid white; }
+
+        /* STARS */
+        .stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 4s infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* PAGES */
         .page {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none;
-            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-            transform: scale(0.9) translateY(20px);
-            padding: 80px 20px 60px;
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: all 0.8s ease;
+            transform: scale(0.95); padding: 60px 20px; z-index: 10;
         }
-        .page.active {
-            opacity: 1; pointer-events: all; transform: scale(1) translateY(0);
-        }
-        
-        .content { max-width: 720px; width: 100%; text-align: center; z-index: 20; }
-        
-        /* ANIMATIONS */
-        @keyframes soft-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        @keyframes pop { 0% { transform: scale(0.4); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes neon-flicker { from { text-shadow: 0 0 10px #ec4899; } to { text-shadow: 0 0 40px #ec4899, 0 0 80px #f472b6; } }
-        @keyframes heart-beat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        @keyframes balloon-float { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-40px) rotate(5deg); } }
-        
+        .page.active { opacity: 1; pointer-events: all; transform: scale(1); }
+
+        /* FLOWER ANIMATIONS */
+        @keyframes growStem { 0% { height: 0; } 100% { height: 180px; } }
+        @keyframes bloomPetal { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 100% { transform: scale(1) rotate(var(--r)); opacity: 1; } }
+
+        /* ENVELOPE */
+        .envelope-inner { transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+        .envelope.open .envelope-inner { transform: rotateX(180deg); }
+
         /* BUTTONS */
         .next-btn {
             background: linear-gradient(90deg, #ec4899, #f472b6);
-            padding: 16px 42px; border-radius: 9999px;
-            font-size: 20px; font-weight: 700; box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 1rem; cursor: pointer; border: none; outline: none;
+            padding: 14px 40px; border-radius: 50px; font-weight: 700;
+            box-shadow: 0 0 30px #ec4899; transition: 0.3s; cursor: pointer;
         }
-        .next-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 50px #f472b6; }
-        
-        .prev-btn {
-            background: rgba(255,255,255,0.1); border: 2px solid rgba(244, 114, 182, 0.5);
-            transition: all 0.3s ease;
-        }
-        .prev-btn:hover { background: rgba(244, 114, 182, 0.3); }
+        .next-btn:hover { transform: scale(1.1); box-shadow: 0 0 50px #f472b6; }
 
-        /* PROGRESS BAR */
-        .progress-bar {
-            height: 28px; background: rgba(255,255,255,0.1); border-radius: 9999px;
-            overflow: hidden; box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 20px rgba(236, 72, 153, 0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .progress-fill {
-            height: 100%; background: linear-gradient(90deg, #ec4899, #f472b6, #fb923c);
-            width: 0%; transition: width 3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 0 30px #ec4899; position: relative;
-        }
-        
-        /* ENVELOPE */
-        .envelope { perspective: 1200px; }
-        .envelope-inner {
-            transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            transform-style: preserve-3d;
-        }
-        .envelope.open .envelope-inner { transform: rotateX(180deg); }
-
-        /* FLOWERS */
-        @keyframes growStem { 0% { height: 0; } 100% { height: 190px; } }
-        @keyframes growLeaf { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1) rotate(inherit); opacity: 1; } }
-        @keyframes fadeInCenter { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes bloomRealistic { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 100% { transform: scale(1) rotate(var(--rot)); opacity: 1; } }
-
-        /* HEART TRAIL CONTAINER */
-        #heartTrail { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 15; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ec4899, #fb923c); width: 0%; transition: 2.5s; }
+        .neon-text { text-shadow: 0 0 10px #ec4899, 0 0 30px #f472b6; animation: neon-flicker 1.5s infinite alternate; }
+        @keyframes neon-flicker { from { opacity: 0.8; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="flex items-center gap-3">
-            <span class="text-3xl animate-pulse">💖</span>
-            <h1 class="text-2xl font-bold tracking-widest">Proposal for <span class="text-pink-400 text-shadow-glow">Cutiee</span></h1>
-        </div>
-        <a href="https://www.instagram.com/smss1708/" target="_blank" class="insta-btn text-white">
-            <span>📸</span> Follow @smss1708
-        </a>
-        <div class="flex items-center gap-2 text-sm font-medium text-pink-300">
-            <span class="px-4 py-1 bg-white/10 rounded-3xl backdrop-blur-sm">Page <span id="current-page">1</span>/10</span>
-        </div>
-    </div>
 
-    <div class="stars" id="stars"></div>
-    <div class="solar-system" id="solarSystem">
-        <div class="sun"></div>
-        <div class="orbit" style="width: 110px; height: 110px; animation: orbit1 25s linear infinite;">
-            <div class="planet" style="width: 18px; height: 18px; top: -9px; left: 50%; background: #a78bfa;"></div>
-        </div>
-        <div class="orbit" style="width: 170px; height: 170px; animation: orbit2 38s linear infinite;">
-            <div class="planet" style="width: 24px; height: 24px; top: -12px; left: 50%; background: #ec4899;"></div>
-        </div>
-        <div class="orbit" style="width: 230px; height: 230px; animation: orbit3 52s linear infinite;">
-            <div class="planet" style="width: 20px; height: 20px; top: -10px; left: 50%; background: #67e8f9;"></div>
-        </div>
-    </div>
+    <audio id="bgMusic" loop><source src="tere-liye.mp3" type="audio/mpeg"></audio>
 
-    <div class="pages" id="pages">
+    <div class="stars" id="star-field"></div>
 
+    <div class="pages">
         <div id="page1" class="page active flex-col">
-            <div class="content">
-                <img src="gif1.gif" alt="Romantic moment" class="romantic-gif">
-                <h1 class="text-7xl font-bold mb-4 tracking-tighter" style="font-family: 'Dancing Script', cursive;">
-                    Hey Cutiee 💕
-                </h1>
-                <p class="text-3xl text-pink-200 mb-8">My universe feels incomplete without you...</p>
-                <button onclick="nextPage()" class="next-btn text-white flex items-center gap-3 mx-auto">
-                    Start the journey with me 🌹
-                </button>
-            </div>
+            <img src="gif1.gif" class="romantic-gif">
+            <h1 class="text-6xl font-bold mb-4" style="font-family:'Dancing Script', cursive;">Hey Cutiee 💕</h1>
+            <p class="text-2xl text-pink-200 mb-8">My universe feels incomplete without you...</p>
+            <button onclick="nextPage()" class="next-btn">Start the journey 🌹</button>
         </div>
 
-        <div id="page2" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif2.gif" alt="Cute moment" class="romantic-gif">
-                <h1 class="text-6xl font-bold mb-6 leading-tight">Do you even know<br>how cute you are, Cutiee?</h1>
-                <p class="text-2xl text-pink-200 mb-8 max-w-md mx-auto">I think it's time we check...</p>
-                <button onclick="nextPage()" class="next-btn text-white flex items-center gap-3 mx-auto px-14">
-                    Let's check 👀😍
-                </button>
-            </div>
+        <div id="page2" class="page flex-col">
+            <img src="gif2.gif" class="romantic-gif">
+            <h1 class="text-5xl font-bold mb-6 text-center">Do you know how<br>cute you are?</h1>
+            <button onclick="nextPage()" class="next-btn">Let's check 👀</button>
         </div>
 
-        <div id="page3" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif3.gif" alt="Cuteness meter" class="romantic-gif" style="width: 180px; height: 180px;">
-                <p class="text-3xl mb-8 flex items-center justify-center gap-3">
-                    Measuring your cuteness... <span class="text-4xl animate-spin" style="animation-duration: 3s;">⏳</span>
-                </p>
-                <div class="progress-bar mx-auto w-96 mb-8">
-                    <div id="progress-fill" class="progress-fill"></div>
+        <div id="page3" class="page flex-col">
+            <img src="gif3.gif" class="romantic-gif">
+            <p class="text-2xl mb-4">Measuring cuteness...</p>
+            <div class="w-80 h-6 bg-white/10 rounded-full overflow-hidden mb-6">
+                <div id="bar" class="progress-fill"></div>
+            </div>
+            <h2 class="text-6xl font-black text-pink-400">120%</h2>
+            <button onclick="nextPage()" class="next-btn mt-6">Too Cute! →</button>
+        </div>
+
+        <div id="page4" class="page flex-col">
+            <img src="gif4.gif" class="romantic-gif">
+            <h2 class="text-3xl mb-6">Flowers for my favorite person 🌸</h2>
+            <div id="flower" class="relative w-64 h-64 mb-6">
+                <div style="position:absolute;bottom:0;left:50%;width:8px;background:#166534;transform:translateX(-50%);animation:growStem 2s forwards;" id="stem"></div>
                 </div>
-                <div class="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400 mb-6 drop-shadow-2xl">120%</div>
-                <div class="text-xl font-medium bg-yellow-400 text-black px-6 py-2 rounded-3xl inline-flex items-center gap-2 mx-auto mb-8 animate-pulse">
-                    ⚠️ WARNING: TOO CUTE TO HANDLE ⚠️
-                </div>
-                <br>
-                <button onclick="nextPage()" class="next-btn">Continue →</button>
-            </div>
+            <button onclick="nextPage()" class="next-btn">These are yours 💐</button>
         </div>
 
-        <div id="page4" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif4.gif" alt="Flowers" class="romantic-gif" style="width: 160px; height: 160px; margin-bottom: 10px;">
-                <h2 class="text-4xl mb-6">These flowers bloomed just for you, Cutiee 🌸</h2>
-                <div class="flower-wrapper mx-auto mb-8" style="width: 300px; height: 320px;" id="flower-container">
-                    </div>
-                <button onclick="nextPage()" class="next-btn">These are for you forever 💐</button>
-            </div>
-        </div>
-
-        <div id="page5" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif5.gif" alt="Love letter" class="romantic-gif" style="width: 160px; height: 160px;">
-                <h2 class="text-5xl mb-8" style="font-family:'Dancing Script',cursive;">A special letter for my Cutiee 💌</h2>
-                <div class="envelope mx-auto cursor-pointer" onclick="openEnvelope(this)" style="width:380px;height:260px;">
-                    <div class="envelope-inner bg-gradient-to-br from-pink-300 to-rose-400 rounded-3xl shadow-2xl relative h-full flex items-center justify-center text-8xl" style="box-shadow: 0 25px 50px -12px rgb(236 72 153);">
-                        📬
-                        <div id="letter-content" style="opacity:0;position:absolute;inset:0;background:white;color:#881337;border-radius:20px;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:40px 30px;transition:all 1s ease; transform: rotateX(180deg);">
-                            <p class="text-3xl font-bold mb-4">My dearest Cutiee...</p>
-                            <p class="text-lg leading-relaxed text-center font-medium">Every star in the sky is jealous of how brightly you shine in my heart. Will you let me love you forever?</p>
-                            <div class="mt-4 text-pink-500 text-5xl animate-bounce">💖</div>
-                        </div>
+        <div id="page5" class="page flex-col">
+            <img src="gif5.gif" class="romantic-gif">
+            <div class="envelope w-80 h-52 cursor-pointer relative" onclick="this.classList.add('open')">
+                <div class="envelope-inner absolute inset-0 bg-pink-400 rounded-xl flex items-center justify-center text-6xl shadow-2xl">
+                    📬
+                    <div class="absolute inset-0 bg-white text-black p-6 rounded-xl flex flex-col items-center justify-center opacity-0 transition-opacity duration-700" style="transform:rotateX(180deg);" id="letter">
+                        <p class="text-xl font-bold text-pink-600">My dearest Cutiee,</p>
+                        <p class="text-sm text-center mt-2">Will you let me love you forever? 💖</p>
                     </div>
                 </div>
-                <button onclick="nextPage()" class="next-btn mt-10">Read more of my heart →</button>
             </div>
+            <button onclick="nextPage()" class="next-btn mt-12">Read more →</button>
         </div>
 
-        <div id="page6" class="page flex-col hidden relative">
-            <div id="heartTrail"></div>
-            <div class="content">
-                <img src="gif6.gif" alt="I love you" class="romantic-gif">
-                <h1 class="text-8xl font-black tracking-[-4px] neon-text mb-6">I LOVE YOU,</h1>
-                <h2 class="text-7xl font-bold text-pink-300 mb-8">Cutiee ❤️</h2>
-                <p class="text-2xl max-w-md mx-auto text-pink-100">My heart draws this trail just for you...</p>
-                <button onclick="nextPage()" class="next-btn mt-10">Keep following my love →</button>
-            </div>
+        <div id="page6" class="page flex-col">
+            <img src="gif6.gif" class="romantic-gif">
+            <h1 class="text-7xl font-black neon-text mb-4">I LOVE YOU</h1>
+            <p class="text-3xl text-pink-300">Cutiee ❤️</p>
+            <button onclick="nextPage()" class="next-btn mt-8">Continue →</button>
         </div>
 
-        <div id="page7" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif7.gif" alt="Neon love" class="romantic-gif" style="width: 150px; height: 150px;">
-                <div class="flex justify-center gap-12 mb-8">
-                    <div class="flex flex-col items-center">
-                        <div style="width:100px;height:100px;border:6px solid #22d3ee;border-radius:9999px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px #22d3ee;">
-                            <div style="width:60px;height:60px;border-radius:9999px;background:#0ea5e9;"></div>
-                        </div>
-                        <div style="width:6px;height:60px;background:#22d3ee;margin-top:8px;box-shadow:0 0 30px #22d3ee;"></div>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div style="width:100px;height:100px;border:6px solid #ec4899;border-radius:9999px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px #ec4899;">
-                            <div style="width:60px;height:60px;border-radius:9999px;background:#f472b6;"></div>
-                        </div>
-                        <div style="width:6px;height:60px;background:#ec4899;margin-top:8px;box-shadow:0 0 30px #ec4899;"></div>
-                    </div>
-                </div>
-                <h1 class="neon-text text-6xl mb-4 font-bold">Cutiee...</h1>
-                <p class="text-4xl font-bold mb-10 text-white drop-shadow-lg">Will you be mine forever?</p>
-                <button onclick="acceptProposal()" class="next-btn text-3xl px-16 py-5 bg-gradient-to-r from-pink-500 to-violet-500 hover:scale-110">YES 💍</button>
+        <div id="page7" class="page flex-col">
+            <img src="gif7.gif" class="romantic-gif">
+            <div class="flex gap-10 mb-10">
+                <div class="flex flex-col items-center"><div class="w-16 h-16 border-4 border-cyan-400 rounded-full shadow-[0_0_20px_#22d3ee]"></div><div class="w-1 h-12 bg-cyan-400"></div></div>
+                <div class="flex flex-col items-center"><div class="w-16 h-16 border-4 border-pink-500 rounded-full shadow-[0_0_20px_#ec4899]"></div><div class="w-1 h-12 bg-pink-500"></div></div>
             </div>
+            <h2 class="text-4xl font-bold mb-8 text-center">Will you be mine forever?</h2>
+            <button onclick="nextPage()" class="next-btn text-2xl">YES 💍</button>
         </div>
 
-        <div id="page8" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif8.gif" alt="You said yes" class="romantic-gif" style="width: 250px; height: 250px; border-radius: 50%;">
-                <h1 class="text-6xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-white">You said YES!</h1>
-                <p class="text-3xl text-pink-200 mt-4">My life just became complete, Cutiee 💖</p>
-                <p class="text-xl mt-6 font-light">Forever starts right now...</p>
-                <button onclick="nextPage()" class="next-btn mt-10">Next chapter of us →</button>
-            </div>
+        <div id="page8" class="page flex-col">
+            <img src="gif8.gif" class="romantic-gif">
+            <h1 class="text-5xl font-black mb-4">You said YES! 🎉</h1>
+            <p class="text-2xl">Forever starts now...</p>
+            <button onclick="nextPage()" class="next-btn mt-6">Next →</button>
         </div>
 
-        <div id="page9" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif9.gif" alt="Special note" class="romantic-gif" style="width: 160px; height: 160px;">
-                <h2 class="text-5xl mb-8" style="font-family:'Dancing Script',cursive;">A little note for you, Cutiee</h2>
-                <div onclick="revealNote(this)" class="mx-auto w-80 h-64 bg-white/90 text-black rounded-3xl shadow-[0_0_40px_rgba(236,72,153,0.5)] flex items-center justify-center cursor-pointer relative transition-all duration-700">
-                    <div class="text-6xl animate-pulse" id="note-icon">💖</div>
-                    <div id="note-text" style="opacity:0;position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:30px;text-align:center;transition:0.8s ease;">
-                        <p class="text-2xl font-bold text-gray-800">You are my favorite notification, my forever emoji, and the only person I want to wake up next to every day.</p>
-                        <p class="text-pink-600 text-xl mt-4 font-bold">- Yours forever</p>
-                    </div>
-                </div>
-                <button onclick="nextPage()" class="next-btn mt-10">Final surprise →</button>
+        <div id="page9" class="page flex-col">
+            <img src="gif9.gif" class="romantic-gif">
+            <div class="p-8 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 text-center max-w-xs">
+                <p class="text-xl italic">"You are my favorite notification and my forever emoji."</p>
             </div>
+            <button onclick="nextPage()" class="next-btn mt-8">Surprise! 🎁</button>
         </div>
 
-        <div id="page10" class="page flex-col hidden">
-            <div class="content">
-                <img src="gif10.gif" alt="Forever love" class="romantic-gif" style="width: 260px; height: 260px; border-radius: 30px;">
-                <div class="flex justify-center gap-6 mb-6">
-                    <div class="balloon text-5xl" style="animation: balloon-float 4s ease-in-out infinite;">🎈</div>
-                    <div class="balloon text-5xl" style="animation: balloon-float 5s ease-in-out infinite 0.5s;">💖</div>
-                    <div class="balloon text-5xl" style="animation: balloon-float 4.5s ease-in-out infinite 1s;">🌹</div>
-                    <div class="balloon text-5xl" style="animation: balloon-float 5.5s ease-in-out infinite 1.5s;">💍</div>
-                </div>
-                <h1 class="text-5xl font-black mb-4">Lots of love for you, Cutiee ❤️</h1>
-                <p class="text-2xl mb-8 font-light text-pink-100">You are my everything.<br>Will you be my forever?</p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="confettiBurst()" class="next-btn text-lg px-8 py-3 m-0">Pop more love 💥</button>
-                    <button onclick="finishProposal()" class="px-8 py-3 text-lg font-bold border-2 border-pink-400 text-pink-100 rounded-full hover:bg-pink-500/20 transition-all shadow-[0_0_20px_rgba(236,72,153,0.3)]">I love you forever</button>
-                </div>
-                
-                <p class="mt-12 text-pink-300 text-sm tracking-widest uppercase opacity-80">Made with infinite love by @smss1708</p>
-            </div>
+        <div id="page10" class="page flex-col">
+            <img src="gif10.gif" class="romantic-gif">
+            <h1 class="text-4xl font-bold mb-4">A Promise to You 🤝</h1>
+            <p class="text-center text-pink-200">I'll always be by your side.</p>
+            <button onclick="nextPage()" class="next-btn mt-10">Click for Final Surprise →</button>
+        </div>
+
+        <div id="page11" class="page flex-col">
+            <video id="myVideo" class="full-vdo mb-6" playsinline>
+                <source src="video1.mp4" type="video/mp4">
+            </video>
+            <h1 class="text-3xl font-bold text-pink-400">My Forever Cutiee ❤️</h1>
+            <p class="mt-4 text-xs opacity-50">Made by @smss1708</p>
         </div>
     </div>
-
-    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-4">
-        <button onclick="prevPage()" class="prev-btn text-white w-12 h-12 rounded-2xl flex items-center justify-center text-3xl shadow-lg backdrop-blur-md">←</button>
-        <button onclick="nextPage()" class="next-btn text-white w-12 h-12 rounded-2xl flex items-center justify-center text-3xl m-0">→</button>
-    </div>
-
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
 
     <script>
-        // 1. Setup Stars & Backgrounds
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `-${Math.random() * 4}s`;
-                starsContainer.appendChild(star);
+        let cur = 1;
+        const total = 11;
+        const music = document.getElementById('bgMusic');
+        const vdo = document.getElementById('myVideo');
+
+        // Stars
+        const field = document.getElementById('star-field');
+        for(let i=0; i<150; i++){
+            const s = document.createElement('div');
+            s.className = 'star';
+            s.style.width = Math.random()*3+'px'; s.style.height = s.style.width;
+            s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
+            field.appendChild(s);
+        }
+
+        function nextPage() {
+            if(cur < total) {
+                document.getElementById('page'+cur).classList.remove('active');
+                cur++;
+                document.getElementById('page'+cur).classList.add('active');
+                
+                if(cur === 3) document.getElementById('bar').style.width = '100%';
+                if(cur === 4) renderFlower();
+                if(cur === 5) setTimeout(() => document.getElementById('letter').style.opacity = 1, 1000);
+                if(cur === 11) {
+                    music.pause(); // Stop tere-liye.mp3
+                    vdo.play();    // Start Video
+                }
+                if(music.paused && cur < 11) music.play();
             }
         }
 
-        function createShootingStars() {
-            const starsContainer = document.getElementById('stars');
-            setInterval(() => {
-                const star = document.createElement('div');
-                star.className = 'shooting-star';
-                star.style.top = `${Math.random() * 50}%`;
-                star.style.left = `${Math.random() * 100}%`;
-                starsContainer.appendChild(star);
-                setTimeout(() => star.remove(), 3000);
-            }, 4000);
-        }
-
-        // 2. Setup CSS Animations Dynamic Injections
-        function setupAnimations() {
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes orbit1 { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
-                @keyframes orbit2 { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
-                @keyframes orbit3 { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // 3. Page Logic & Interactions
-        let currentPage = 1;
-        const totalPages = 10;
-        let trailInterval = null;
-
-        function showPage(pageNum) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-                page.classList.add('hidden'); 
-            });
-            
-            const target = document.getElementById(`page${pageNum}`);
-            if (target) {
-                target.classList.remove('hidden');
-                // slight delay to trigger CSS transition
-                setTimeout(() => target.classList.add('active'), 50);
-                
-                currentPage = pageNum;
-                document.getElementById('current-page').textContent = currentPage;
-                
-                // Triggers
-                if (pageNum === 3) setTimeout(() => document.getElementById('progress-fill').style.width = '120%', 800);
-                if (pageNum === 4) renderFlower();
-                if (pageNum === 6) startHeartTrail();
-                else stopHeartTrail();
-            }
-        }
-
-        function nextPage() { if (currentPage < totalPages) showPage(currentPage + 1); }
-        function prevPage() { if (currentPage > 1) showPage(currentPage - 1); }
-
-        // 4. Special Page Effects
         function renderFlower() {
-            const container = document.getElementById('flower-container');
-            if(container.innerHTML.trim() !== "") return; // Render once
-
-            let html = `
-            <div style="position:relative;width:100%;height:100%;">
-                <div style="position:absolute;bottom:0;left:50%;width:12px;height:190px;background:linear-gradient(#166534,#4ade80);border-radius:50px 50px 0 0;transform:translateX(-50%);box-shadow:3px 6px 12px rgba(0,0,0,0.3);animation:growStem 2s forwards;"></div>
-                <div style="position:absolute;bottom:80px;left:38%;width:80px;height:50px;background:linear-gradient(45deg,#166534,#4ade80);border-radius:0 75% 25% 85%;transform:rotate(-40deg) scale(0);animation:growLeaf 1.5s forwards 1.2s;"></div>
-                <div style="position:absolute;bottom:80px;right:38%;width:80px;height:50px;background:linear-gradient(45deg,#166534,#4ade80);border-radius:75% 0 85% 25%;transform:rotate(40deg) scale(0);animation:growLeaf 1.5s forwards 1.5s;"></div>
-                
-                <div style="position:absolute;top:80px;left:50%;width:220px;height:220px;transform:translateX(-50%);">
-                    <div style="position:absolute;top:50%;left:50%;width:50px;height:50px;background:radial-gradient(#fde047,#f59e0b);border-radius:50%;margin:-25px 0 0 -25px;box-shadow:0 0 30px #facc15;animation:fadeInCenter 1s forwards 3s;opacity:0;"></div>
-                    <div style="position:absolute;top:50%;left:50%;">`;
-            
-            // Generate Petals Safely
-            for(let i=0; i<9; i++) {
-                html += `<div style="position:absolute;width:110px;height:130px;border-radius:65% 85% 35% 75%/75% 55% 80% 45%;background:linear-gradient(135deg,#f43f5e,#fb7185);--rot:${i*40}deg;transform:rotate(0deg) scale(0);margin:-120px 0 0 -55px;animation:bloomRealistic 2.5s ease forwards ${2 + (i*0.15)}s;box-shadow:inset 10px 15px 20px rgba(255,255,255,.5);"></div>`;
-            }
-            html += `</div></div></div>`;
-            container.innerHTML = html;
-        }
-
-        function openEnvelope(el) {
-            el.classList.add('open');
-            setTimeout(() => document.getElementById('letter-content').style.opacity = 1, 600);
-        }
-
-        function revealNote(el) {
-            el.classList.add('!bg-gradient-to-br', '!from-pink-300', '!to-rose-300');
-            document.getElementById('note-icon').style.display = 'none';
-            document.getElementById('note-text').style.opacity = 1;
-        }
-
-        // Heart Trail optimized with WAAPI
-        function startHeartTrail() {
-            if(trailInterval) return;
-            const trail = document.getElementById('heartTrail');
-            trailInterval = setInterval(() => {
-                const heart = document.createElement('div');
-                heart.style.position = 'absolute';
-                heart.style.fontSize = Math.random() > 0.5 ? '24px' : '32px';
-                heart.style.left = `${Math.random() * 100}%`;
-                heart.style.bottom = '-40px';
-                heart.textContent = ['💖','💗','🌸','✨'][Math.floor(Math.random()*4)];
-                trail.appendChild(heart);
-                
-                const duration = 3000 + Math.random() * 3000;
-                const endY = -(window.innerHeight + 100);
-                const rot = Math.random() * 360;
-                const drift = (Math.random() - 0.5) * 200; // Sway effect
-                
-                heart.animate([
-                    { transform: 'translate(0, 0) rotate(0deg) scale(0.5)', opacity: 0 },
-                    { transform: `translate(${drift/2}px, ${endY/2}px) rotate(${rot/2}deg) scale(1.2)`, opacity: 0.8, offset: 0.5 },
-                    { transform: `translate(${drift}px, ${endY}px) rotate(${rot}deg) scale(1)`, opacity: 0 }
-                ], { duration, easing: 'ease-out' });
-                
-                setTimeout(() => heart.remove(), duration);
-            }, 150);
-        }
-        function stopHeartTrail() { clearInterval(trailInterval); trailInterval = null; }
-
-        // Confetti optimized with WAAPI
-        function confettiBurst() {
-            for (let i = 0; i < 60; i++) {
-                const conf = document.createElement('div');
-                conf.style.position = 'fixed';
-                conf.style.zIndex = '9999';
-                conf.style.left = '50%';
-                conf.style.top = '50%';
-                conf.style.fontSize = ['20px','25px','30px'][Math.floor(Math.random()*3)];
-                conf.textContent = ['💖','🌹','💍','✨','😍'][Math.floor(Math.random()*5)];
-                document.body.appendChild(conf);
-                
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = 200 + Math.random() * 400;
-                const tx = Math.cos(angle) * velocity;
-                const ty = Math.sin(angle) * velocity - 200; // Push upwards
-                
-                conf.animate([
-                    { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
-                    { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1.5) rotate(${Math.random()*360}deg)`, opacity: 1, offset: 0.6 },
-                    { transform: `translate(calc(-50% + ${tx*1.5}px), calc(-50% + ${ty*1.5 + 400}px)) scale(1) rotate(${Math.random()*720}deg)`, opacity: 0 }
-                ], { duration: 2500 + Math.random()*1000, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' });
-                
-                setTimeout(() => conf.remove(), 3500);
+            const f = document.getElementById('flower');
+            if(f.children.length > 1) return;
+            for(let i=0; i<8; i++){
+                const p = document.createElement('div');
+                p.style = `position:absolute;top:20px;left:50%;width:60px;height:80px;background:linear-gradient(#f43f5e,#fb7185);border-radius:50% 50% 50% 50% / 80% 80% 20% 20%;margin-left:-30px;--r:${i*45}deg;animation:bloomPetal 2s forwards ${1+i*0.2}s;opacity:0;box-shadow:inset 0 0 15px rgba(0,0,0,0.2);`;
+                f.appendChild(p);
             }
         }
 
-        function acceptProposal() {
-            const page7 = document.getElementById('page7');
-            page7.style.transform = 'scale(1.05)';
-            confettiBurst();
-            setTimeout(() => {
-                page7.style.transform = 'scale(1)';
-                nextPage();
-            }, 600);
-        }
-
-        function finishProposal() {
-            confettiBurst();
-            setTimeout(confettiBurst, 500);
-            
-            const finalMsg = document.createElement('div');
-            finalMsg.className = 'fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#0a001f]/95 backdrop-blur-md transition-opacity duration-1000 opacity-0';
-            finalMsg.innerHTML = `
-                <div class="text-9xl mb-8 animate-bounce" style="filter: drop-shadow(0 0 30px #ec4899);">💍</div>
-                <h1 class="text-7xl font-bold text-center leading-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-white drop-shadow-lg">Cutiee,<br>you are my forever ❤️</h1>
-                <p class="mt-8 text-3xl text-pink-200">Thank you for saying yes to my universe.</p>
-                <div class="mt-12 text-pink-400 font-bold tracking-widest uppercase">Made specially for you by @smss1708</div>
-            `;
-            document.body.appendChild(finalMsg);
-            
-            // Fade in
-            requestAnimationFrame(() => finalMsg.classList.remove('opacity-0'));
-            
-            // Remove after delay
-            setTimeout(() => {
-                finalMsg.classList.add('opacity-0');
-                setTimeout(() => finalMsg.remove(), 1000);
-            }, 6000);
-        }
-
-        // 5. Initialize
-        window.onload = () => {
-            createStars();
-            createShootingStars();
-            setupAnimations();
-            
-            const audio = document.getElementById('bgMusic');
-            audio.volume = 0.4;
-            
-            // Try autoplay on first click anywhere (browser policy workaround)
-            document.body.addEventListener('click', () => {
-                if(audio.paused) audio.play().catch(e => console.log('Audio wait'));
-            }, { once: true });
-            
-            showPage(1);
-        };
+        window.onload = () => { music.volume = 0.5; document.body.addEventListener('click', () => { if(cur < 11) music.play() }, {once:true}); };
     </script>
 </body>
-    </html>
+</html>
