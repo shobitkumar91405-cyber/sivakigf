@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Maggi Online Delivery for Misti 🌙🍜</title>
+    <title>For My Favorite Person 💗</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap');
@@ -11,7 +11,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            background: radial-gradient(circle at center, #ff6b35 0%, #f7931e 50%, #000000 100%);
+            background: radial-gradient(circle at center, #1a001f 0%, #000000 100%);
             font-family: 'Poppins', sans-serif;
             overflow: hidden; color: #ffffff; user-select: none;
             height: 100vh; width: 100vw;
@@ -20,8 +20,8 @@
         .header-tag {
             position: fixed; top: 15px; width: 100%; text-align: center;
             z-index: 1000; font-family: 'Dancing Script', cursive;
-            color: #ffeb3b; font-size: 1.5rem; letter-spacing: 2px;
-            text-shadow: 0 0 20px #ff6b35; pointer-events: none;
+            color: #ffb3d9; font-size: 1.5rem; letter-spacing: 2px;
+            text-shadow: 0 0 20px #ff00cc; pointer-events: none;
         }
 
         /* Smooth & Fast Transitions */
@@ -37,7 +37,7 @@
 
         .cute-msg { 
             font-family: 'Dancing Script', cursive; 
-            color: #fff176; text-shadow: 0 0 25px #ff6b35, 0 0 45px #ffeb3b; 
+            color: #ffebf5; text-shadow: 0 0 25px #ff00cc, 0 0 45px #ff00cc; 
             font-size: clamp(2.2rem, 8vw, 3.5rem); margin: 15px 0; font-weight: 700; 
         }
         .sub-text { 
@@ -45,130 +45,126 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.8); line-height: 1.4;
         }
         
-        .maggi-img { 
+        .gif-frame { 
             width: 240px; height: 240px; border-radius: 30px; 
-            border: 3px solid #ff6b35; box-shadow: 0 0 40px rgba(255,107,53,0.6); 
+            border: 3px solid #ff00cc; box-shadow: 0 0 40px rgba(255, 0, 204, 0.6); 
             object-fit: cover; margin-bottom: 10px;
         }
 
         .glow-btn { 
-            background: linear-gradient(45deg, #ff6b35, #f7931e); 
+            background: linear-gradient(45deg, #ff00cc, #ff69b4); 
             padding: 15px 40px; border-radius: 50px; font-weight: 700; 
-            box-shadow: 0 0 25px rgba(255,107,53,0.5); 
+            box-shadow: 0 0 25px rgba(255, 0, 204, 0.5); 
             cursor: pointer; color: white; border: none; font-size: 1.1rem;
             transition: 0.2s; margin-top: 20px;
         }
         .glow-btn:active { transform: scale(0.9); }
         
-        /* Maggi Steam Animation */
-        .steam-container { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
-        .steam { 
-            position: absolute; width: 20px; height: 40px; background: rgba(255,255,255,0.6); 
-            border-radius: 10px 10px 0 0; animation: steamRise 2s infinite; 
-        }
-        .steam:nth-child(1) { left: 100px; animation-delay: 0s; }
-        .steam:nth-child(2) { left: 120px; animation-delay: 0.3s; }
-        .steam:nth-child(3) { left: 140px; animation-delay: 0.6s; }
-        @keyframes steamRise { 0% { transform: translateY(0) scaleY(1); opacity: 1; } 100% { transform: translateY(-60px) scaleY(0.3); opacity: 0; } }
+        /* 3D Solar System */
+        .solar-system { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; }
+        .orbit { position: absolute; border: 2px solid rgba(255,105,180,0.4); border-radius: 50%; animation: spin linear infinite; }
+        .orbit-1 { width: 170px; height: 170px; animation-duration: 5s; }
+        .orbit-2 { width: 260px; height: 260px; animation-duration: 9s; animation-direction: reverse; }
+        .planet { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-size: 28px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* Stars */
-        .star { position: absolute; background: #ffeb3b; border-radius: 50%; animation: twinkle var(--d) infinite alternate; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--d) infinite alternate; }
         @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Order Progress Bar */
-        .order-container { width: 260px; height: 14px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 20px; overflow: hidden; border: 1px solid #ff6b35; }
-        #orderProgress { height: 100%; background: linear-gradient(90deg, #ff6b35, #f7931e); width: 0%; box-shadow: 0 0 20px #ff6b35; transition: width 0.1s linear; }
-
-        /* Delivery Animation */
-        .delivery-bike { font-size: 4rem; animation: ride 2s infinite; }
-        @keyframes ride { 0%, 100% { transform: translateX(-20px); } 50% { transform: translateX(20px); } }
+        /* Hold Bar */
+        .hold-container { width: 260px; height: 14px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 20px; overflow: hidden; border: 1px solid #ff00cc; }
+        #holdProgress { height: 100%; background: #ff00cc; width: 0%; box-shadow: 0 0 20px #ff00cc; transition: width 0.1s linear; }
 
         /* Video Layer */
         #videoLayer { display: none; position: fixed; inset: 0; background: black; z-index: 10000; align-items: center; justify-content: center; }
         video { width: 100%; height: 100%; object-fit: contain; }
 
-        .maggi-tag { position: fixed; bottom: 15px; width: 100%; text-align: center; font-size: 0.9rem; color: #ffeb3b; opacity: 0.7; z-index: 1000; }
+        .insta-tag { position: fixed; bottom: 15px; width: 100%; text-align: center; font-size: 0.9rem; color: #ffb3d9; opacity: 0.7; z-index: 1000; }
     </style>
 </head>
 <body>
 
-    <div class="header-tag">Maggi Online Delivery 🌙🍜</div>
+    <div class="header-tag">Follow on insta - @smss1708 💗</div>
 
-    <audio id="bgMusic" loop src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" preload="auto"></audio>
+    <audio id="bgMusic" loop src="tere-liye.mp3" preload="auto"></audio>
     <div id="stars-container" class="fixed inset-0 pointer-events-none"></div>
 
     <div id="slide1" class="slide active">
-        <img src="https://images.unsplash.com/photo-1606853737397-4baf67e6af93?w=300&h=300&fit=crop&crop=center" class="maggi-img" alt="Hot Maggi">
-        <h1 class="cute-msg">Hey Misti! 🌙</h1>
-        <p class="sub-text">Raat ho rahi hai aur tujhe Maggi pasand hai... Main order kar deta hun! 🍜</p>
-        <button onclick="startApp()" class="glow-btn">Order Maggi Now 🔥</button>
+        <img src="gif1.gif" class="gif-frame">
+        <h1 class="cute-msg">Hey Gorgeous! ✨</h1>
+        <p class="sub-text">We just met, but my heart already knew it was you!</p>
+        <button onclick="startApp()" class="glow-btn">Touch My Heart 🥺</button>
     </div>
 
     <div id="slide2" class="slide">
-        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=300&h=300&fit=crop&crop=center" class="maggi-img" alt="Maggi Bowl">
-        <h1 class="cute-msg">Classic Maggi! 🧡</h1>
-        <p class="sub-text">Teri favorite Masala Maggi, garam garam ban rahi hai!</p>
-        <button onclick="next()" class="glow-btn">Cooking... ⏳</button>
+        <img src="gif2.gif" class="gif-frame">
+        <h1 class="cute-msg">How are you so cute?</h1>
+        <p class="sub-text">Seriously, your smile is the highlight of my day!</p>
+        <button onclick="next()" class="glow-btn">See More 💕</button>
     </div>
 
     <div id="slide3" class="slide">
-        <img src="https://images.unsplash.com/photo-1542994983-9de75d7a2f3b?w=300&h=300&fit=crop&crop=center" class="maggi-img" alt="Steaming Maggi">
-        <h1 class="cute-msg">Garam Garam! 🔥</h1>
-        <button onclick="next()" class="glow-btn">Packing... 📦</button>
+        <img src="gif3.gif" class="gif-frame">
+        <h1 class="cute-msg">Our Vibe is Rare! 😌</h1>
+        <button onclick="next()" class="glow-btn">Next Step ✨</button>
     </div>
 
     <div id="slide4" class="slide">
-        <div style="font-size: 5rem; transition: 0.3s;" id="pulseMaggi">🍜</div>
-        <h1 class="cute-msg mb-4">Kitni pasand hai tujhe?</h1>
-        <div class="order-container"><div id="orderProgress"></div></div>
-        <button id="holdBtn" class="glow-btn mt-6 select-none">HOLD TO CONFIRM ORDER</button>
+        <div class="text-9xl mb-4" id="pulseHeart" style="transition: 0.3s;">💖</div>
+        <h1 class="text-2xl font-bold">How much do I adore you?</h1>
+        <div class="hold-container"><div id="holdProgress"></div></div>
+        <button id="holdBtn" class="glow-btn mt-6 select-none">PRESS & HOLD TO FEEL</button>
     </div>
 
     <div id="slide5" class="slide">
-        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=300&h=300&fit=crop&crop=center" class="maggi-img" alt="Delivery">
-        <h1 class="cute-msg">Order Confirmed! ✅</h1>
-        <p class="sub-text">Teri Maggi 5 min mein pahunch jayegi!</p>
-        <button onclick="next()" class="glow-btn">Track Order 📍</button>
+        <img src="gif4.gif" class="gif-frame">
+        <h1 class="cute-msg">One in a Billion! 💎</h1>
+        <button onclick="next()" class="glow-btn">Continue...</button>
     </div>
 
     <div id="slide6" class="slide">
-        <div class="steam-container">
-            <div class="steam"></div>
-            <div class="steam"></div>
-            <div class="steam"></div>
-            <div style="font-size: 6rem;">🍜</div>
+        <div class="solar-system">
+            <div class="orbit orbit-1"><span class="planet">💗</span></div>
+            <div class="orbit orbit-2"><span class="planet">⭐</span></div>
+            <div class="text-6xl">🌍</div>
         </div>
-        <h1 class="cute-msg mt-10">Steaming Hot! 🌫️</h1>
-        <button onclick="next()" class="glow-btn">On the Way 🛵</button>
+        <h1 class="cute-msg mt-10">My Whole Universe!</h1>
+        <button onclick="next()" class="glow-btn">Keep Going 🚀</button>
     </div>
 
     <div id="slide7" class="slide">
-        <div class="delivery-bike">🛵➡️🍜</div>
-        <h1 class="cute-msg mt-6">Delivery Boy aa gaya! 🚚</h1>
-        <button onclick="next()" class="glow-btn">Doorstep pe! 🏠</button>
+        <img src="gif5.gif" class="gif-frame">
+        <h1 class="cute-msg">Don't ever leave! 🥺</h1>
+        <button onclick="next()" class="glow-btn">Wait for it...</button>
     </div>
 
     <div id="slide8" class="slide">
-        <img src="https://images.unsplash.com/photo-1574651351432-1f54d7ec5e27?w=300&h=300&fit=crop&crop=center" class="maggi-img" alt="Ready to Eat">
-        <h1 class="cute-msg">Maggi Delivered! 🎉</h1>
-        <p class="sub-text">Ab kha le apni favorite Maggi aur enjoy kar!</p>
-        <button onclick="next()" class="glow-btn">Good Night Message 💤</button>
+        <h1 class="cute-msg">My Brightest Star! ⭐</h1>
+        <p class="sub-text">In a sky full of stars, my eyes only search for you.</p>
+        <button onclick="next()" class="glow-btn">Almost there ✨</button>
     </div>
 
     <div id="slide9" class="slide">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=center" class="maggi-img" alt="Night">
-        <h1 class="cute-msg">Good Night Misti! 🌙✨</h1>
-        <p class="sub-text">Sweet dreams with Maggi memories! Sleep tight! 😴❤️</p>
-        <button onclick="playSurprise()" class="glow-btn">One Last Surprise 🎁</button>
+        <img src="gif6.gif" class="gif-frame">
+        <h1 class="cute-msg">Be My Friend? ❤️</h1>
+        <div id="btnContainer" class="flex flex-wrap justify-center gap-4 mt-4">
+            <button onclick="next()" class="glow-btn">YES! 😍</button>
+            <button id="noBtn" onclick="trapNo()" class="bg-gray-800 p-3 px-8 rounded-full">No 🥺</button>
+        </div>
+    </div>
+
+    <div id="slide10" class="slide">
+        <img src="gif7.gif" class="gif-frame">
+        <h1 class="cute-msg">Yaaay! Happy Heart! 🥳</h1>
+        <button onclick="playSurprise()" class="glow-btn animate-bounce">A FINAL SURPRISE 🎁</button>
     </div>
 
     <div id="videoLayer">
-        <video id="vPlayer" playsinline controls>
-            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-        </video>
+        <video id="vPlayer" playsinline src="video1.mp4"></video>
     </div>
 
-    <div class="maggi-tag">Maggi Online Delivery Service 🍜🌙</div>
+    <div class="insta-tag">Follow on Insta: @smss1708</div>
 
     <script>
         let step = 1;
@@ -210,26 +206,38 @@
             }
         }
 
-        // Optimized Hold for Order Confirmation
+        function trapNo() {
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.display = 'none';
+            for(let i=0; i<3; i++) {
+                const b = document.createElement('button');
+                b.innerHTML = "YES! 💖";
+                b.className = "glow-btn";
+                b.onclick = next;
+                document.getElementById('btnContainer').appendChild(b);
+            }
+        }
+
+        // Optimized Hold
         let hVal = 0, hInt;
-        const hBtn = document.getElementById('holdBtn'), hProg = document.getElementById('orderProgress'), pMaggi = document.getElementById('pulseMaggi');
+        const hBtn = document.getElementById('holdBtn'), hProg = document.getElementById('holdProgress'), pHeart = document.getElementById('pulseHeart');
         
         const startH = (e) => { 
             e.preventDefault(); 
-            pMaggi.style.transform = 'scale(1.5) rotate(10deg)';
+            pHeart.style.transform = 'scale(1.5)';
             hInt = setInterval(() => { 
                 hVal += 2.5; 
                 hProg.style.width = hVal + '%'; 
                 if(hVal >= 100) { clearInterval(hInt); next(); } 
             }, 30); 
         };
-        const endH = () => { clearInterval(hInt); hVal = 0; hProg.style.width = '0%'; pMaggi.style.transform = 'scale(1)'; };
+        const endH = () => { clearInterval(hInt); hVal = 0; hProg.style.width = '0%'; pHeart.style.transform = 'scale(1)'; };
         
         hBtn.onmousedown = hBtn.ontouchstart = startH; 
         window.onmouseup = window.ontouchend = endH;
 
         function playSurprise() { 
-            music.pause();
+            music.pause(); // Purely stop background music
             music.currentTime = 0;
             const layer = document.getElementById('videoLayer');
             layer.style.display = 'flex';
