@@ -3,432 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ A Special Message For You ✨</title>
+    <title>For My Cutee 💖</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; } [cite: 2]
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --primary-pink: #ff69b4;
-            --soft-pink: #ffb6c1; [cite: 4]
             --deep-pink: #ff1493;
-            --glow-pink: #ff69b4;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, #fff 0%, #ffebee 25%, #fff0f5 50%, #fdf2f8 75%, #fff 100%); [cite: 5]
-            --glow-shadow: 0 0 20px var(--glow-pink), 0 0 40px var(--glow-pink); [cite: 6]
+            --soft-glow: rgba(255, 20, 147, 0.3);
+            --white-glass: rgba(255, 255, 255, 0.85);
         }
 
         body {
-            font-family: 'Poppins', sans-serif; [cite: 7]
-            background: var(--gradient); [cite: 8]
-            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: #fffafa; /* Clean Soft White */
+            height: 100vh;
             overflow: hidden;
-            cursor: none; [cite: 9]
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 15px; height: 15px; [cite: 10]
-            background: var(--deep-pink);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: var(--glow-shadow);
-            transition: transform 0.1s ease;
+        /* Floating Hearts Animation */
+        .bg-hearts {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1;
         }
 
-        .cursor.follower {
-            width: 35px; height: 35px; [cite: 12]
-            background: rgba(255, 105, 180, 0.3);
-            opacity: 0.5;
-        }
-
-        /* Particles */
-        .particles-container {
-            position: fixed; top: 0; left: 0; [cite: 13]
-            width: 100%; height: 100%;
-            pointer-events: none; z-index: 1;
-        }
-
-        .particle {
+        .heart-particle {
             position: absolute;
-            animation: float linear infinite; [cite: 15]
-            filter: drop-shadow(0 0 5px var(--glow-pink));
+            animation: move linear infinite;
+            color: var(--primary-pink);
+            opacity: 0.6;
         }
 
-        @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg) scale(0); opacity: 0; } [cite: 20]
-            10% { opacity: 1; transform: scale(1); } [cite: 21]
-            90% { opacity: 1; }
-            100% { transform: translateY(-20vh) rotate(360deg) scale(0.5); opacity: 0; } [cite: 23]
+        @keyframes move {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* UI Elements */
-        .header {
-            position: fixed; top: 20px; left: 50%; [cite: 33]
+        /* Insta Header */
+        .insta-header {
+            position: fixed; top: 15px; left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 25px;
+            background: var(--white-glass);
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--primary-pink);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .insta-header a { color: var(--deep-pink); text-decoration: none; }
+
+        /* Card Container */
+        .container {
+            width: 90%; max-width: 450px;
+            min-height: 500px;
+            background: var(--white-glass);
+            backdrop-filter: blur(15px);
             border-radius: 30px;
-            border: 1px solid rgba(255, 105, 180, 0.3); [cite: 34]
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
         }
 
-        .music-player {
-            position: fixed; bottom: 30px; right: 30px; [cite: 35]
-            z-index: 1000; width: 60px; height: 60px;
-            border-radius: 50%; background: white;
-            display: flex; align-items: center; justify-content: center; [cite: 37]
-            cursor: pointer; box-shadow: var(--glow-shadow);
-            transition: 0.3s;
+        .container.active { display: flex; animation: fadeIn 0.8s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .music-player:hover { transform: scale(1.1); } [cite: 38]
+        /* Elements Styling */
+        .gif-box img { width: 180px; border-radius: 20px; margin-bottom: 20px; }
 
-        /* Page System */
-        .page-container {
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center; [cite: 46]
-            position: absolute; top: 0; left: 0; width: 100%;
-            opacity: 0; visibility: hidden; [cite: 47]
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .page-container.active {
-            opacity: 1; visibility: visible; [cite: 49]
-            transform: translateY(0);
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.95); [cite: 51]
-            padding: 40px; border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(255, 105, 180, 0.2); [cite: 52]
-            width: 90%; max-width: 550px; text-align: center;
-        }
-
-        .glow-text {
-            background: linear-gradient(45deg, var(--deep-pink), var(--primary-pink)); [cite: 26]
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            font-weight: 700;
-        }
-
-        .typing-container {
+        .glowing-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 28px; min-height: 60px; margin: 20px 0; [cite: 59]
+            font-size: 32px;
+            color: var(--deep-pink);
+            text-shadow: 0 0 10px var(--soft-glow);
+            margin: 20px 0;
+            line-height: 1.4;
         }
 
-        .ultra-btn {
-            background: linear-gradient(45deg, var(--deep-pink), var(--primary-pink)); [cite: 64]
-            color: white; border: none; padding: 15px 40px;
-            border-radius: 50px; cursor: pointer; [cite: 64]
-            font-size: 18px; font-weight: 600;
-            transition: 0.3s; margin-top: 20px;
+        .msg-text { font-size: 17px; color: #444; margin-bottom: 25px; }
+
+        .btn-continue {
+            background: linear-gradient(45deg, var(--deep-pink), var(--primary-pink));
+            color: white; border: none; padding: 12px 40px;
+            border-radius: 50px; cursor: pointer;
+            font-size: 16px; font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
         }
 
-        .ultra-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 105, 180, 0.4); } [cite: 70]
+        .btn-continue:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4); }
 
-        /* Love Meter */
-        .love-meter-container {
-            width: 250px; height: 250px; margin: 20px auto; position: relative; [cite: 73]
-        }
+        /* Shayari Specific */
+        .shayari-line { opacity: 0; margin: 10px 0; transition: 1s; }
+        .line-show { opacity: 1; transform: translateY(-5px); }
 
-        .love-meter {
-            width: 100%; height: 100%; border-radius: 50%; [cite: 74]
-            background: conic-gradient(var(--soft-pink) 0deg, #eee 0deg);
-            transition: 0.1s;
-        }
-
-        .meter-center {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); [cite: 77]
-            width: 80%; height: 80%; background: white; border-radius: 50%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; [cite: 78]
-        }
-
-        .no-btn { background: #ccc !important; } [cite: 173]
-
-        .celebration {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; [cite: 94]
-            pointer-events: none; z-index: 10000; opacity: 0;
-        }
-
-        .confetti {
-            position: absolute; width: 8px; height: 8px; [cite: 96]
-            animation: fall 3s infinite linear;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } [cite: 99]
+        /* Audio Button */
+        .music-btn {
+            position: fixed; bottom: 20px; right: 20px;
+            background: white; border-radius: 50%; padding: 12px;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
-    <div class="cursor follower" id="cursorFollower"></div>
-    <div class="cursor" id="cursor"></div>
-    <div class="particles-container" id="particles"></div>
+    <div class="bg-hearts" id="hearts"></div>
 
-    <div class="header">
-        <a href="https://instagram.com/smss1708" target="_blank" style="color: #ff1493; text-decoration: none; font-family: 'Dancing Script'; font-size: 20px;">
-            Made with ✨ by Sivasingh
-        </a>
+    <div class="insta-header">
+        Follow on Insta - <a href="https://instagram.com/smss1708">@smss1708</a>
     </div>
 
-    <div class="music-player" id="musicToggle">
-        <span id="musicIcon">🎵</span>
-        <audio id="bgMusic" loop>
-            <source src="tere-liye.mp3" type="audio/mpeg">
-        </audio>
+    <audio id="bgMusic" loop>
+        <source src="tere-liye.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container active" id="p1">
+        <div class="gif-box"><img src="gif1.gif" alt="Cute GIF"></div>
+        <h1 class="glowing-text">Hii Cutie... ✨</h1>
+        <p class="msg-text">I have something really special to say to you. Dil se sunna... ❤️</p>
+        <button class="btn-continue" onclick="nextPage(1, 2)">Continue</button>
     </div>
 
-    <div class="page-container active" data-page="0">
-        <div class="content-card">
-            <div style="font-size: 3rem;">✨</div>
-            <div class="typing-container glow-text" data-text="Hii, Suno na..." id="typing0"></div>
-            <button class="ultra-btn" onclick="nextPage()">Aage Suno ✨</button> [cite: 107]
+    <div class="container" id="p2">
+        <h1 class="glowing-text">Pata Hai?</h1>
+        <p class="msg-text">Jab tum hasti ho na, toh poori duniya aur bhi khoobsurat lagne lagti hai. 😊</p>
+        <button class="btn-continue" onclick="nextPage(2, 3)">Aage Suno...</button>
+    </div>
+
+    <div class="container" id="p3">
+        <h1 class="glowing-text">Tumhari Dosti ✨</h1>
+        <p class="msg-text">Tumhari dosti mere liye sabse badi nemat hai, par ab dil kuch aur keh raha hai...</p>
+        <button class="btn-continue" onclick="nextPage(3, 4)">Kya? ✨</button>
+    </div>
+
+    <div class="container" id="p4">
+        <h1 class="glowing-text">Every Moment... 💖</h1>
+        <p class="msg-text">Har wo pal jo maine tumhare saath bitaya hai, wo mere dil ke bohot kareeb hai.</p>
+        <button class="btn-continue" onclick="nextPage(4, 5)">Next ➡️</button>
+    </div>
+
+    <div class="container" id="p5">
+        <h1 class="glowing-text">I Really Like You!</h1>
+        <p class="msg-text">Haan, tum thodi ziddi ho, thodi pagli ho... par tum jaisi bhi ho, meri favourite ho. 😍</p>
+        <button class="btn-continue" onclick="nextPage(5, 6)">Pakka? 🌹</button>
+    </div>
+
+    <div class="container" id="p6">
+        <h2 class="glowing-text" style="font-size: 26px;">Sirf Tumhare Liye...</h2>
+        <div id="shayari-box" class="glowing-text" style="font-size: 20px;">
+            <p class="shayari-line">Tum bologi dhimi awaaz me 🌹</p>
+            <p class="shayari-line">Fir bhi baat pakad lunga 💕</p>
+            <p class="shayari-line">Gale nahi lagaunga tumko 💖</p>
+            <p class="shayari-line">Bas haath pakad lunga ✨</p>
         </div>
+        <button class="btn-continue" id="shayariBtn" style="display:none;" onclick="nextPage(6, 7)">Pyari hai na? ❤️</button>
     </div>
 
-    <div class="page-container" data-page="1">
-        <div class="content-card">
-            <div class="typing-container glow-text" data-text="Pata nahi tum kaise react karogi..." id="typing1"></div>
-            <button class="ultra-btn" onclick="nextPage()">Bolo na... ➡️</button>
-        </div>
+    <div class="container" id="p7">
+        <h1 class="glowing-text">Waada Raha... 🤝</h1>
+        <p class="msg-text">Main hamesha tumhara saath dunga, har mushkil me aur har khushi me.</p>
+        <button class="btn-continue" onclick="nextPage(7, 8)">Promise? 💍</button>
     </div>
 
-    <div class="page-container" data-page="2">
-        <div class="content-card">
-            <div class="typing-container glow-text" data-text="Par tumhare saath waqt bitana achha lagta hai." id="typing2"></div>
-            <button class="ultra-btn" onclick="nextPage()">Achha? ✨</button>
-        </div>
+    <div class="container" id="p8">
+        <h1 class="glowing-text">Ek Nayi Shuruat?</h1>
+        <p class="msg-text">Kya hum is dosti ko ek pyaara sa naam de sakte hain? ✨</p>
+        <button class="btn-continue" onclick="nextPage(8, 9)">Bolo... 🤗</button>
     </div>
 
-    <div class="page-container" data-page="3">
-        <div class="content-card">
-            <div class="typing-container glow-text" data-text="Tumhari dosti mere liye bahut special hai..." id="typing3"></div>
-            <button class="ultra-btn" onclick="nextPage()">Hmm... 💖</button> [cite: 109]
-        </div>
+    <div class="container" id="p9">
+        <h1 class="glowing-text">Be Mine? 💖</h1>
+        <p class="msg-text">I don't just want to be your friend, I want to be the reason behind your smile every day.</p>
+        <button class="btn-continue" onclick="nextPage(9, 10)">Last One ✨</button>
     </div>
 
-    <div class="page-container" data-page="4">
-        <div class="content-card">
-            <div class="typing-container glow-text" data-text="Dosti se thoda zyada feel hota hai ab..." id="typing4"></div>
-            <button class="ultra-btn" onclick="nextPage()">Matlab? 😊</button>
-        </div>
+    <div class="container" id="p10">
+        <div class="gif-box"><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueW5qZzR3eG5qZzR3eG5qZzR3eG5qZzR3eG5qZzR3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNUMo/giphy.gif" alt="Love"></div>
+        <h1 class="glowing-text">I Love You! ❤️</h1>
+        <p class="msg-text">Will you walk with me forever? 💍✨</p>
+        <button class="btn-continue" onclick="alert('Yayyy! 💖 She said Yes!')">YES! ❤️</button>
     </div>
-
-    <div class="page-container" data-page="5">
-        <div class="content-card">
-            <div class="typing-container glow-text" data-text="Mujhe tum bahut pasand ho... ek dost se badhkar." id="typing5"></div>
-            <button class="ultra-btn" onclick="nextPage()">Sach mein? 🌸</button> [cite: 112]
-        </div>
-    </div>
-
-    <div class="page-container" data-page="6">
-        <div class="content-card">
-            <div class="typing-container glow-text" data-text="Kya hum ek nayi shuruat kar sakte hain?" id="typing6"></div>
-            <button class="ultra-btn" onclick="nextPage()">Kaise? ✨</button>
-        </div>
-    </div>
-
-    <div class="page-container" data-page="7">
-        <div class="content-card">
-            <div class="typing-container glow-text" data-text="Bas ek baar ye shayari suno mere liye..." id="typing7"></div>
-            <button class="ultra-btn" onclick="nextPage()">Sunao... 💞</button>
-        </div>
-    </div>
-
-    <div class="page-container" data-page="8">
-        <div class="content-card">
-            <h3 class="glow-text" style="margin-bottom:15px;">Dil ki Baat ✨</h3>
-            <div id="shayari" class="typing-container" style="font-size: 18px; text-align: left; min-height: 200px;"></div>
-            <button class="ultra-btn" onclick="nextPage()">Beautiful! 💝</button> [cite: 115]
-        </div>
-    </div>
-
-    <div class="page-container" data-page="9">
-        <div class="content-card">
-            <div class="glow-text" id="calcText">Checking our Connection...</div>
-            <div class="love-meter-container">
-                <div class="love-meter" id="loveMeter">
-                    <div class="meter-center">
-                        <div id="meterText" class="glow-text" style="font-size: 24px;">0%</div>
-                    </div>
-                </div>
-            </div>
-            <button class="ultra-btn" id="loveContinue" onclick="nextPage()" style="display:none;">Perfect! ✨</button> [cite: 118]
-        </div>
-    </div>
-
-    <div class="page-container" data-page="10">
-        <div class="content-card">
-            <h2 class="glow-text" style="font-size: 32px; font-family: 'Dancing Script';">Will you walk by my side, forever? 💖</h2>
-            <div style="margin-top: 30px;">
-                <button class="ultra-btn" onclick="celebrateLove()">Yes, I'd Love To! ❤️</button> [cite: 120]
-                <button class="ultra-btn no-btn" id="noBtn" onmouseover="runAway()">No... 😢</button> [cite: 173]
-            </div>
-        </div>
-    </div>
-
-    <div class="celebration" id="celebration"></div>
 
     <script>
-        class LoveStory {
-            constructor() {
-                this.currentPage = 0;
-                this.totalPages = 10; [cite: 122]
-                this.isTyping = false;
-                this.musicPlaying = false;
-                this.init();
-            }
+        // Start Music on First Click
+        document.body.addEventListener('click', () => {
+            document.getElementById('bgMusic').play();
+        }, { once: true });
 
-            init() {
-                this.setupCursor();
-                this.createParticles();
-                this.setupMusic();
-                this.handlePageContent(); [cite: 162]
-            }
+        // Page Navigation
+        function nextPage(current, next) {
+            document.getElementById('p' + current).classList.remove('active');
+            const nextP = document.getElementById('p' + next);
+            nextP.classList.add('active');
 
-            setupCursor() {
-                const cursor = document.getElementById('cursor');
-                const follower = document.getElementById('cursorFollower');
-                document.addEventListener('mousemove', (e) => {
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
-                    follower.style.left = e.clientX + 'px';
-                    follower.style.top = e.clientY + 'px';
-                });
-            }
-
-            createParticles() {
-                const container = document.getElementById('particles');
-                const icons = ['💖', '✨', '🌸', '💕']; [cite: 125]
-                setInterval(() => {
-                    const p = document.createElement('div');
-                    p.className = 'particle';
-                    p.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-                    p.style.left = Math.random() * 100 + 'vw';
-                    p.style.fontSize = Math.random() * 20 + 10 + 'px';
-                    p.style.animationDuration = Math.random() * 3 + 4 + 's';
-                    container.appendChild(p);
-                    setTimeout(() => p.remove(), 6000); [cite: 129]
-                }, 300);
-            }
-
-            setupMusic() {
-                const music = document.getElementById('bgMusic');
-                const toggle = document.getElementById('musicToggle');
-                toggle.addEventListener('click', () => {
-                    if(this.musicPlaying) {
-                        music.pause();
-                        document.getElementById('musicIcon').textContent = '🔇'; [cite: 138]
-                    } else {
-                        music.play().catch(() => {});
-                        document.getElementById('musicIcon').textContent = '🎵'; [cite: 139]
-                    }
-                    this.musicPlaying = !this.musicPlaying;
-                });
-            }
-
-            async typeWriter(element, text) {
-                if(!element) return;
-                this.isTyping = true;
-                element.innerHTML = '';
-                for(let char of text) {
-                    element.innerHTML += char;
-                    await new Promise(r => setTimeout(r, 60)); [cite: 144]
-                }
-                this.isTyping = false;
-            }
-
-            async nextPage() {
-                if(this.isTyping) return; [cite: 160]
-                const current = document.querySelector(`[data-page="${this.currentPage}"]`);
-                this.currentPage++;
-                const next = document.querySelector(`[data-page="${this.currentPage}"]`);
-                
-                if(next) {
-                    current.classList.remove('active');
-                    setTimeout(() => {
-                        next.classList.add('active');
-                        this.handlePageContent();
-                    }, 400);
-                }
-            }
-
-            async handlePageContent() {
-                const page = this.currentPage;
-                if(page < 8) {
-                    const el = document.getElementById(`typing${page}`);
-                    await this.typeWriter(el, el.parentElement.dataset.text); [cite: 163]
-                } else if(page === 8) {
-                    await this.showShayari(); [cite: 164]
-                } else if(page === 9) {
-                    this.loveMeter(); [cite: 165]
-                }
-            }
-
-            async showShayari() {
-                const lines = [
-                    "Tum bologi dhimi awaaz me 🌹",
-                    "Fir bhi baat pakad lunga 💕",
-                    "Gale nahi lagaunga tumko 💖",
-                    "Bas haath pakad lunga ✨",
-                    "",
-                    "Hotel me nahi jana mujhko 🏨",
-                    "Sadak pe saath chalna hai 🚶‍♂️💃",
-                    "Thodi si meri ho sakti ho kya? 💯💖"
-                ]; [cite: 147, 149, 151]
-                const box = document.getElementById('shayari');
-                for(let line of lines) {
-                    box.innerHTML += line + "<br>";
-                    await new Promise(r => setTimeout(r, 1200)); [cite: 152]
-                }
-            }
-
-            loveMeter() {
-                let count = 0;
-                const meter = document.getElementById('loveMeter');
-                const text = document.getElementById('meterText');
-                const interval = setInterval(() => {
-                    count++;
-                    meter.style.background = `conic-gradient(#ff69b4 ${count * 3.6}deg, #eee 0deg)`; [cite: 155]
-                    text.innerText = count + "%";
-                    if(count >= 100) {
-                        clearInterval(interval);
-                        document.getElementById('loveContinue').style.display = 'inline-block'; [cite: 159]
-                    }
-                }, 40);
-            }
-
-            runAway() {
-                const btn = document.getElementById('noBtn');
-                btn.style.position = 'absolute';
-                btn.style.top = Math.random() * 80 + '%';
-                btn.style.left = Math.random() * 80 + '%'; [cite: 173]
-            }
-
-            celebrateLove() {
-                const cel = document.getElementById('celebration');
-                cel.style.opacity = '1';
-                for(let i=0; i<100; i++) {
-                    const c = document.createElement('div');
-                    c.className = 'confetti';
-                    c.style.left = Math.random() * 100 + 'vw';
-                    c.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
-                    c.style.animationDelay = Math.random() * 2 + 's';
-                    cel.appendChild(c);
-                } [cite: 180, 182]
-                setTimeout(() => alert("I'm so happy! Thank you for being in my life! ❤️✨"), 1000); [cite: 178]
+            // Trigger Shayari Animation on Page 6
+            if(next === 6) {
+                animateShayari();
             }
         }
 
-        const app = new LoveStory();
+        // Shayari Line-by-Line Effect
+        async function animateShayari() {
+            const lines = document.querySelectorAll('.shayari-line');
+            for(let i=0; i<lines.length; i++) {
+                await new Promise(r => setTimeout(r, 1500));
+                lines[i].classList.add('line-show');
+            }
+            setTimeout(() => {
+                document.getElementById('shayariBtn').style.display = 'inline-block';
+            }, 1000);
+        }
+
+        // Floating Hearts Background
+        const heartContainer = document.getElementById('hearts');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heartContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
