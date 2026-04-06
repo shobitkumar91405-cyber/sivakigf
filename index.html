@@ -3,249 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Favorite Person 💗</title>
+    <title>Good Morning Arpita 💙</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-
+        
         body {
-            background: radial-gradient(circle at center, #1a001f 0%, #000000 100%);
+            background: #ffffff;
             font-family: 'Poppins', sans-serif;
             overflow: hidden; height: 100vh; width: 100vw;
-            color: #ffffff; user-select: none; touch-action: manipulation;
+            color: #333; user-select: none;
         }
 
-        /* Fixed Background Stars - Performance Optimized */
-        #stars-container { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-        .star { 
-            position: absolute; background: white; border-radius: 50%; 
-            animation: realTwinkle var(--dur) infinite ease-in-out;
-            will-change: opacity, transform;
-        }
-        @keyframes realTwinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.7); }
-            50% { opacity: 1; transform: scale(1.2); }
+        /* Floating Hearts Background */
+        .bg-elements {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.5;
         }
 
-        .header-tag {
-            position: fixed; top: 15px; width: 100%; text-align: center;
-            z-index: 100; font-family: 'Dancing Script', cursive;
-            color: #ffb3d9; font-size: 1.5rem;
-            text-shadow: 0 0 10px rgba(255,179,217,0.6);
-        }
-
-        /* Ultra-Smooth Transitions */
         .slide {
             display: none; position: fixed; inset: 0; width: 100%; height: 100%;
             align-items: center; justify-content: center; flex-direction: column;
-            opacity: 0; z-index: 20; padding: 25px; text-align: center;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            transform: scale(0.98);
+            opacity: 0; z-index: 20; padding: 30px; text-align: center;
+            transition: all 0.8s ease-in-out;
+            background: rgba(255, 255, 255, 0.95);
         }
-        .slide.active { display: flex; opacity: 1; transform: scale(1); }
+        .slide.active { display: flex; opacity: 1; }
 
-        .cute-msg { 
-            font-family: 'Dancing Script', cursive; color: #ffffff; 
-            text-shadow: 0 0 15px #ff00cc, 3px 3px 6px rgba(0,0,0,1); 
-            font-size: clamp(2.2rem, 8vw, 3.2rem); 
-            margin-top: 15px; font-weight: 700; line-height: 1.2;
+        /* BLUE GLOWING TEXT EFFECT */
+        .glow-blue { 
+            font-family: 'Dancing Script', cursive; 
+            color: #0077ff; 
+            text-shadow: 0 0 10px rgba(0, 119, 255, 0.6), 0 0 20px rgba(0, 119, 255, 0.4); 
+            font-size: clamp(2.5rem, 9vw, 3.5rem); 
+            margin-bottom: 15px;
+            animation: pulseGlow 2s infinite alternate;
         }
-        .sub-text { color: #ffffff; font-weight: 600; font-size: 1.15rem; margin-top: 10px; max-width: 320px; text-shadow: 1px 1px 5px #000; }
+
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 10px rgba(0, 119, 255, 0.6); }
+            to { text-shadow: 0 0 25px rgba(0, 119, 255, 0.9), 0 0 35px rgba(0, 119, 255, 0.4); }
+        }
+
+        .sub-msg { color: #555; font-weight: 400; font-size: 1.1rem; line-height: 1.6; max-width: 80%; }
         
-        .gif-frame { 
-            width: 250px; height: 250px; border-radius: 30px; 
-            border: 4px solid #ff00cc; box-shadow: 0 0 30px rgba(255, 0, 204, 0.5); 
-            object-fit: cover; background: #000;
+        /* Romantic Photo Frame */
+        .photo-frame { 
+            width: 280px; height: 350px; border-radius: 20px; 
+            border: 8px solid #fff; box-shadow: 0 20px 40px rgba(0,119,255,0.15); 
+            object-fit: cover; margin-bottom: 25px;
+            transform: rotate(-2deg); transition: 0.5s;
         }
+        .slide.active .photo-frame { transform: rotate(0deg) scale(1.05); }
 
-        .glow-btn { 
-            background: linear-gradient(45deg, #ff00cc, #ff69b4); 
-            padding: 14px 35px; border-radius: 50px; font-weight: 700; 
-            box-shadow: 0 0 20px rgba(255, 0, 204, 0.4); 
-            cursor: pointer; border: none; color: white; font-size: 1.1rem;
-            margin-top: 20px; transition: 0.2s;
+        .btn-blue { 
+            background: #0077ff; color: white;
+            padding: 12px 35px; border-radius: 50px; font-weight: 600; 
+            box-shadow: 0 10px 20px rgba(0, 119, 255, 0.3); 
+            cursor: pointer; margin-top: 30px; transition: 0.3s;
+            border: none; outline: none;
         }
-        .glow-btn:active { transform: scale(0.9); }
+        .btn-blue:active { transform: scale(0.9); }
 
-        /* Solar System Animation (Re-Added) */
-        .solar-system { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
-        .orbit { position: absolute; border: 2px solid rgba(255,105,180,0.3); border-radius: 50%; animation: spin linear infinite; }
-        .orbit-1 { width: 180px; height: 180px; animation-duration: 6s; }
-        .orbit-2 { width: 260px; height: 260px; animation-duration: 10s; animation-direction: reverse; }
-        .planet { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font-size: 26px; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* Progress Bar for Hold */
+        .hold-container { width: 200px; height: 8px; background: #f0f0f0; border-radius: 10px; margin-top: 20px; overflow: hidden; }
+        #holdProgress { height: 100%; background: #0077ff; width: 0%; }
 
-        /* Progress Bar */
-        .hold-container { width: 280px; height: 18px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 25px; overflow: hidden; border: 2px solid white; }
-        #holdProgress { height: 100%; background: linear-gradient(90deg, #ff00cc, #ff69b4); width: 0%; transition: width 0.1s linear; }
-
-        #videoLayer { display: none; position: fixed; inset: 0; background: black; z-index: 1000; align-items: center; justify-content: center; }
-        video { width: 100%; height: 100%; object-fit: contain; }
     </style>
 </head>
 <body>
 
-    <div class="header-tag">Made by - @smss1708💗</div>
-    <audio id="bgMusic" loop src="tere-liye.mp3" preload="auto"></audio>
-    <div id="stars-container"></div>
+    <div class="bg-elements">
+        </div>
 
     <div id="slide1" class="slide active">
-        <img src="gif1.gif" class="gif-frame">
-        <h1 class="cute-msg">Hey Gorgeous! ✨</h1>
-        <p class="sub-text">We just met, but my heart already knew it was you!</p>
-        <button onclick="startApp()" class="glow-btn">Touch My Heart 🥺</button>
+        <img src="photo1.jpg" class="photo-frame">
+        <h1 class="glow-blue">Good Morning, Arpita!</h1>
+        <p class="sub-msg">The sun is up, but my world starts when you wake up. 💙</p>
+        <button onclick="next()" class="btn-blue">Wake Up My Love ☕</button>
     </div>
 
     <div id="slide2" class="slide">
-        <img src="gif2.gif" class="gif-frame">
-        <h1 class="cute-msg">How are you so cute?</h1>
-        <p class="sub-text">Seriously, your smile is the highlight of my day!</p>
-        <button onclick="next()" class="glow-btn">See More 💕</button>
+        <img src="photo2.jpg" class="photo-frame">
+        <h1 class="glow-blue">Thinking of You</h1>
+        <p class="sub-msg">I hope your morning is as bright and beautiful as your soul, Arpita.</p>
+        <button onclick="next()" class="btn-blue">Keep Smiling ✨</button>
     </div>
 
     <div id="slide3" class="slide">
-        <img src="gif3.gif" class="gif-frame">
-        <h1 class="cute-msg">Our Vibe is Rare! 😌</h1>
-        <p class="sub-text">Talking to you feels like time has completely stopped.</p>
-        <button onclick="next()" class="glow-btn">Next Step ✨</button>
+        <img src="photo3.jpg" class="photo-frame">
+        <h1 class="glow-blue">My Purest Joy</h1>
+        <p class="sub-msg">Everything is better when you are by my side. Have a wonderful day!</p>
+        <button onclick="next()" class="btn-blue">Next Surprise 🌸</button>
     </div>
 
     <div id="slide4" class="slide">
-        <div class="text-8xl mb-6 transition-transform duration-300" id="pulseHeart">💖</div>
-        <h1 class="text-2xl font-bold">How much do I adore you?</h1>
+        <h1 class="glow-blue">Hold for Love</h1>
+        <p class="sub-msg">Arpita, press and hold the button to send me a virtual hug!</p>
         <div class="hold-container"><div id="holdProgress"></div></div>
-        <button id="holdBtn" class="glow-btn select-none">PRESS & HOLD TO FEEL</button>
+        <button id="holdBtn" class="btn-blue select-none">PRESS & HOLD 💙</button>
     </div>
 
     <div id="slide5" class="slide">
-        <img src="gif4.gif" class="gif-frame">
-        <h1 class="cute-msg">You're One in a Billion! 💎</h1>
-        <p class="sub-text">It's only been a short time, but the feeling is magical.</p>
-        <button onclick="next()" class="glow-btn">Continue...</button>
+        <img src="photo4.jpg" class="photo-frame">
+        <h1 class="glow-blue">Sweet Arpita</h1>
+        <p class="sub-msg">Just a little reminder that you are loved more than words can say.</p>
+        <button onclick="next()" class="btn-blue">One More... 🦋</button>
     </div>
 
     <div id="slide6" class="slide">
-        <div class="solar-system">
-            <div class="orbit orbit-1"><span class="planet">💗</span></div>
-            <div class="orbit orbit-2"><span class="planet">⭐</span></div>
-            <div class="text-6xl">🌍</div>
-        </div>
-        <h1 class="cute-msg mt-10">My Whole Universe!</h1>
-        <p class="sub-text">Everything seems better when you're around.</p>
-        <button onclick="next()" class="glow-btn">Keep Going 🚀</button>
+        <img src="photo5.jpg" class="photo-frame">
+        <h1 class="glow-blue">Be My Sunshine</h1>
+        <p class="sub-msg">Go out there and shine today, my queen. You've got this!</p>
+        <button onclick="next()" class="btn-blue">Click for Last Page 🎁</button>
     </div>
 
     <div id="slide7" class="slide">
-        <img src="gif5.gif" class="gif-frame">
-        <h1 class="cute-msg">Don't ever leave! 🥺</h1>
-        <p class="sub-text">I've never met anyone as sweet and special as you.</p>
-        <button onclick="next()" class="glow-btn">Wait for it...</button>
-    </div>
-
-    <div id="slide8" class="slide">
-        <h1 class="cute-msg">You're my Brightest Star! ⭐</h1>
-        <p class="sub-text">In a sky full of stars, my eyes only search for you.</p>
-        <button onclick="next()" class="glow-btn">Just a bit more ✨</button>
-    </div>
-
-    <div id="slide9" class="slide">
-        <img src="gif6.gif" class="gif-frame">
-        <h1 class="cute-msg">Will You Be My Friend? ❤️</h1>
-        <div id="btnContainer" class="flex flex-wrap justify-center gap-3 mt-4">
-            <button onclick="next()" class="glow-btn">YES! 😍</button>
-            <button id="noBtn" onclick="trapNo()" class="px-8 py-3 bg-gray-800 rounded-full text-gray-400 mt-5">No 🥺</button>
+        <div class="flex gap-2">
+            <img src="photo6.jpg" class="photo-frame" style="width: 140px; height: 180px;">
+            <img src="photo7.jpg" class="photo-frame" style="width: 140px; height: 180px;">
         </div>
-    </div>
-
-    <div id="slide10" class="slide">
-        <img src="gif7.gif" class="gif-frame">
-        <h1 class="cute-msg">Yaaay! My Heart is Happy! 🥳</h1>
-        <p class="sub-text">I promise to keep that beautiful smile on your face!</p>
-        <button onclick="playSurprise()" class="glow-btn animate-bounce">A FINAL SURPRISE 🎁</button>
-    </div>
-
-    <div id="videoLayer">
-        <video id="vPlayer" playsinline src="video1.mp4"></video>
+        <h1 class="glow-blue">Forever Yours</h1>
+        <p class="sub-msg">Good Morning, Arpita! I'm so lucky to have you in my life. I love you!(as frnd) 💙</p>
+        <p class="mt-10 text-xs text-gray-400">Made by 📷 - @smss1708</p>
     </div>
 
     <script>
         let step = 1;
-        const music = document.getElementById('bgMusic');
-
-        // Fast Star Generation
-        const starContainer = document.getElementById('stars-container');
-        const frag = document.createDocumentFragment();
-        for(let i=0; i<100; i++) {
-            const s = document.createElement('div');
-            s.className = 'star';
-            const size = Math.random() * 2 + 1 + 'px';
-            s.style.width = size; s.style.height = size;
-            s.style.left = Math.random() * 100 + 'vw';
-            s.style.top = Math.random() * 100 + 'vh';
-            s.style.setProperty('--dur', (Math.random() * 2 + 1) + 's');
-            frag.appendChild(s);
-        }
-        starContainer.appendChild(frag);
-
-        function startApp() { music.play().catch(e => console.log(e)); next(); }
 
         function next() {
             const current = document.getElementById('slide' + step);
-            const nextS = document.getElementById('slide' + (step + 1));
-            if(current) {
-                current.classList.remove('active');
-                setTimeout(() => { current.style.display = 'none'; }, 400);
-            }
-            if(nextS) {
-                step++;
-                nextS.style.display = 'flex';
-                void nextS.offsetWidth; // Force Reflow for instant animation
-                nextS.classList.add('active');
-            }
+            if(current) current.classList.remove('active');
+            step++;
+            setTimeout(() => {
+                const nextS = document.getElementById('slide' + step);
+                if(nextS) nextS.classList.add('active');
+            }, 100);
         }
 
-        function trapNo() {
-            const container = document.getElementById('btnContainer');
-            document.getElementById('noBtn').style.display = 'none';
-            for(let i=0; i<5; i++) {
-                const b = document.createElement('button');
-                b.className = "glow-btn"; b.innerHTML = "YES! 💖";
-                b.onclick = next; container.appendChild(b);
-            }
-        }
-
-        // Hold Logic
+        // Hold Logic for Page 4
         let hVal = 0, hInt;
-        const hBtn = document.getElementById('holdBtn'), 
-              hProg = document.getElementById('holdProgress'), 
-              pHeart = document.getElementById('pulseHeart');
+        const hBtn = document.getElementById('holdBtn'), hProg = document.getElementById('holdProgress');
         
         const startH = (e) => { 
             e.preventDefault(); 
-            pHeart.style.transform = 'scale(1.5)';
             hInt = setInterval(() => { 
-                hVal += 2.5; 
+                hVal += 2; 
                 hProg.style.width = hVal + '%'; 
-                if(hVal >= 100) { clearInterval(hInt); next(); } 
+                if(hVal >= 100) { 
+                    clearInterval(hInt); 
+                    next(); 
+                } 
             }, 30); 
         };
-        const endH = () => { clearInterval(hInt); hVal = 0; hProg.style.width = '0%'; pHeart.style.transform = 'scale(1)'; };
+        const endH = () => { clearInterval(hInt); hVal = 0; hProg.style.width = '0%'; };
         
         hBtn.addEventListener('touchstart', startH);
         hBtn.addEventListener('mousedown', startH);
         window.addEventListener('touchend', endH);
         window.addEventListener('mouseup', endH);
-
-        function playSurprise() {
-            music.pause();
-            const layer = document.getElementById('videoLayer');
-            layer.style.display = 'flex';
-            const v = document.getElementById('vPlayer');
-            v.play();
-            v.onended = () => location.reload();
-        }
     </script>
 </body>
-    </html>
+</html>
